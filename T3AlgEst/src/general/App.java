@@ -9,6 +9,11 @@ import javax.swing.plaf.synth.SynthSeparatorUI;
 public class App {
 	
 	private static GeneralTreeOfString arvore;
+	private static String livro;
+	private static String capitulo;
+	private static String secao;
+	private static String subcecao;
+	private static String paragrafo;
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -31,26 +36,27 @@ public class App {
 					throw new RuntimeException("só pode haver um livro");
 				livroUnico = true;
 				arvore.add("linha", null);
+				livro = linha;
 				break;
 			case "C ":
 				emCapitulo(linha);
+				capitulo = linha;
 				break;
 			case "S ":
 				emSecao(linha);
+				secao = linha;
 				break;
 			case "SS":
 				emSubsecao(linha);
+				subcecao = linha;
 				break;
 			case "P ":
 				emParagrafo(linha);
+				paragrafo = linha;
 				break;
 			default:
 				throw new RuntimeException("Erro de leitura do tipo de linha!");				
-			}		
-			
-			
-			
-			
+			}				
 		}
 		in.close();	//fecha o arquivo	
 		//===================================================================================					
@@ -84,6 +90,7 @@ public class App {
 	
 	public static void emCapitulo(String tipo){
 		System.out.println("C está funcionando");
+						
 		
 	}
 	public static void emSecao(String tipo){
