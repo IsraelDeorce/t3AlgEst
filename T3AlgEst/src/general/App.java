@@ -12,7 +12,7 @@ public class App {
 	private static String livro;
 	private static String capitulo;
 	private static String secao;
-	private static String subcecao;
+	private static String subsecao;
 	private static String paragrafo;
 	
 	public static void main(String[] args) throws IOException{
@@ -35,24 +35,24 @@ public class App {
 				if(livroUnico)
 					throw new RuntimeException("só pode haver um livro");
 				livroUnico = true;
-				arvore.add("linha", null);
 				livro = linha;
+				arvore.add("linha", null);				
 				break;
 			case "C ":
-				emCapitulo(linha);
 				capitulo = linha;
+				emCapitulo(linha);				
 				break;
 			case "S ":
-				emSecao(linha);
 				secao = linha;
+				emSecao(linha);				
 				break;
 			case "SS":
+				subsecao = linha;
 				emSubsecao(linha);
-				subcecao = linha;
 				break;
 			case "P ":
-				emParagrafo(linha);
 				paragrafo = linha;
+				emParagrafo(linha);				
 				break;
 			default:
 				throw new RuntimeException("Erro de leitura do tipo de linha!");				
@@ -89,20 +89,20 @@ public class App {
 	}	
 	
 	public static void emCapitulo(String tipo){
-		System.out.println("C está funcionando");
+		System.out.println(capitulo+" está funcionando");
 						
 		
 	}
 	public static void emSecao(String tipo){
-		System.out.println("S está funcionando");
+		System.out.println(secao+" está funcionando");
 		
 	}
 	public static void emSubsecao(String tipo){
-		System.out.println("SS está funcionando");
+		System.out.println(subsecao+" está funcionando");
 		
 	}
 	public static void emParagrafo(String tipo){
-		System.out.println("P está funcionando");
+		System.out.println(paragrafo+" está funcionando");
 		
 	}
 }
