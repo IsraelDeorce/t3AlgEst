@@ -3,6 +3,7 @@ package general;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -13,17 +14,45 @@ public class App {
 	private static String capitulo;
 	private static String secao;
 	private static String subsecao;
-	private static String paragrafo;
+	private static String paragrafo;	
 	
 	public static void main(String[] args) throws IOException{
+		ArrayList<String> linhas = new ArrayList<String>();
 		
 		arvore = new GeneralTreeOfString();
+		
 		boolean livroUnico = false;
 		
+		try(BufferedReader in = new BufferedReader(new FileReader("livro.txt"))){
+			String linha = "";			
+			while((linha=in.readLine())!=null){
+				linhas.add(linha);
+			}
+		}
 			
-		//===================================================================================
-		//Gera os 100 nomes do txt e armazena em um vetor para ser utilizado no gerador de clientes			
-		BufferedReader in = new BufferedReader(new FileReader("livro.txt")); 			
+		for(int i = 0, j=1; j<linhas.size();i++,j++){
+			String linhaUm = linhas.get(i);
+			String linhaDois = linhas.get(j);
+			
+			if(linhaUm.toUpperCase().charAt(0)=='L')
+				arvore = new GeneralTreeOfString(linhaAnterior);
+			else{
+				switch()
+				
+			
+			case 'C':
+				
+			}
+		}
+		System.out.println(arvore.getRoot());
+	}
+}
+		
+		
+		
+	
+	/*		
+		
 		
 		for (int i=0; in.ready(); i++) 
 		{ 			
@@ -60,8 +89,8 @@ public class App {
 		}
 		in.close();	//fecha o arquivo	
 		//===================================================================================					
-		/* TESTES QUE FUNCIONAM (precisa dos TADS Integer e não String:
-		 * 
+		 TESTES QUE FUNCIONAM (precisa dos TADS Integer e não String:
+		  
 		GeneralTreeOfString arvore = new  GeneralTreeOfString();
 		arvore.add(15, null);
 		arvore.add(23, 15);		
@@ -85,7 +114,7 @@ public class App {
 		System.out.println(lista2.toString());
 		System.out.println("Posições Width:");
 		System.out.println(lista3.toString());	
-		*/
+		
 	}	
 	
 	public static void emCapitulo(String tipo){
@@ -103,6 +132,6 @@ public class App {
 	}
 	public static void emParagrafo(String tipo){
 		System.out.println(paragrafo+" está funcionando");
-		
 	}
-}
+	
+	*/
