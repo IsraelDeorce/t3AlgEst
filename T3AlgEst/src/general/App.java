@@ -90,6 +90,7 @@ public class App {
 	
 	public static void emCapitulo(String tipo){
 		System.out.println(capitulo+" está funcionando");
+		arvore.add(tipo, livro);
 						
 		
 	}
