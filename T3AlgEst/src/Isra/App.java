@@ -61,7 +61,7 @@ public class App {
 			try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		       new FileOutputStream("livro_prod.txt"), "utf-8"))) {
 					writer.write("--------------------------------------------");
-					for(int i=1; i<=umaPagina; i++){
+					for(int i=1; i<=15; i++){
 						writer.write("\n"+i);
 						if(i==7)
 							writer.write("               "+livro.get(0)+"               ");
@@ -71,7 +71,7 @@ public class App {
 						for(int i=1; i<=livro.size(); i++){											
 							int capitulo = 0, secao = 0, subsecao = 0, paragrafo = 0;
 							String linha = "", tipo = "", numeracao = "";
-							for(int j=0; j<=umaPagina;j++){							
+							for(int j=0; j<=15;j++){							
 								linha = livro.get(j);
 								tipo = linha.substring(0, 2);
 								switch(tipo){
