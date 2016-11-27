@@ -2,6 +2,8 @@ package Isra;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class GeneralTreeOfString {	
 	
 	private Node root;
@@ -229,8 +231,8 @@ public class GeneralTreeOfString {
 		else{		
 			Node pai = new Node(livro.get(0));
 			Node filho = new Node(livro.get(1));
-			this.root = pai;
-			if(pai.element.substring(0, 2)=="L "){			
+			this.root = pai;	
+			if(pai.element.substring(0, 2).equals("L ")){			
 				montaArvoreAux(pai,filho,2,livro);
 			}			
 		}
@@ -239,21 +241,21 @@ public class GeneralTreeOfString {
 	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){
 		if(pos>=livro.size()) return;	
 		
-		if(root.element.substring(0, 2)=="C "){
-			this.root.addSubtree(root);
+		if(filho.element.substring(0, 2).equals("C ")){			
+			this.root.addSubtree(filho);
 			montaArvoreAux(this.root,new Node(livro.get(pos)),pos+1, livro);
 		}		
-		if(root.element.substring(0, 2)=="S "){
-			this.root.addSubtree(root);
-			montaArvoreAux(pai,new Node(livro.get(pos)),pos+1, livro);
+		if(filho.element.substring(0, 2).equals("S ")){
+			pai.addSubtree(filho);
+			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
-		if(root.element.substring(0, 2)=="SS "){
-			this.root.addSubtree(root);
-			montaArvoreAux(pai,new Node(livro.get(pos)),pos+1, livro);
+		if(filho.element.substring(0, 2).equals("SS ")){
+			pai.addSubtree(filho);
+			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
-		if(root.element.substring(0, 2)=="P "){
-			this.root.addSubtree(root);
-			montaArvoreAux(pai,new Node(livro.get(pos)),pos+1, livro);
+		if(filho.element.substring(0, 2).equals("P ")){
+			pai.addSubtree(filho);
+			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 	}
 
