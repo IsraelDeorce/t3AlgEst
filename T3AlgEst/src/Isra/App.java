@@ -41,6 +41,7 @@ public class App {
 		LinkedListOfString lista1 = arvore.positionsPre();
 		LinkedListOfString lista2 = arvore.positionsPos();
 		LinkedListOfString lista3 = arvore.positionsWidth();
+		ArrayList<String >lista4 = arvore.positions();
 		
 		System.out.println("Posições Pré:");
 		System.out.println(lista1.toString());
@@ -48,6 +49,8 @@ public class App {
 		System.out.println(lista2.toString());
 		System.out.println("Posições Width:");
 		System.out.println(lista3.toString());	
+		System.out.println("Posições:");
+		System.out.println(lista4.toString());
 	
 		/*
 	}
