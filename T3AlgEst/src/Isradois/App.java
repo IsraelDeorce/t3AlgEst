@@ -49,6 +49,7 @@ public class App {
 			throw new RuntimeException("Erro ao gerar o sumário");	
 		
 		geraDocumento();
+		
 
 	}
 		public void escondeComents(){	
@@ -163,64 +164,90 @@ public class App {
 	}
 	
 	public static void geraDocumento() throws UnsupportedEncodingException, FileNotFoundException, IOException{
-		int umaPagina = 15;		
+		
 		
 		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+				
 	       new FileOutputStream("livro_prod.txt"), "utf-8"))) {
 				writer.write("--------------------------------------------");
-				for(int i=1; i<=umaPagina; i++){
+				for(int i=1; i<=15; i++){
 					writer.write("\n"+i);
 					if(i==7)
 						writer.write("               "+livro.get(0)+"               ");
 					if(i==15)
 						writer.write("\n-------------------------------------- Capa");
-				}				
-					for(int i=1; i<=livro.size(); i++){											
-						int capitulo = 0, secao = 0, subsecao = 0, paragrafo = 0;
-						String linha = "", tipo = "", numeracao = "";
-						for(int j=0; j<=umaPagina;j++){							
-							linha = livro.get(j);
+				}		
+				
+				
+				int capitulo = 0, secao = 0, subsecao = 0, paragrafo = 0;
+				String linha = "", tipo = "", numeracao = "";
+				
+				int pag = 0;				
+				
+				for(int i=0, j=0; i<lista.size(); i++){								
+							linha = livro.get(i);							
 							tipo = linha.substring(0, 2);
 							switch(tipo){
 							case "C ":
+								j++;								
 								capitulo++;
 								secao = 0;
 								subsecao = 0;
 								paragrafo = 0;
-								numeracao = String.valueOf(capitulo) + ". ";	
-								writer.write("\n"+j+"  "+linha.replace(tipo, numeracao));								
+								numeracao = String.valueOf(capitulo) + ". ";									
+								writer.write("\n"+j+"  "+linha.replace(tipo, numeracao));	
+								if(j>=15){
+									j=0;
+									pag++;
+									writer.write("\n-------------------------------------- pg."+pag);
+								}
 								break;
 							case "S ":
+								j++;
 								secao++;
 								subsecao = 0;
 								paragrafo = 0;
 								numeracao = String.valueOf(capitulo) + "."
 											+ String.valueOf(secao) + ". ";	
 								writer.write("\n"+j+"  "+linha.replace(tipo, numeracao));
+								if(j>=15){
+									j=0;
+									pag++;
+									writer.write("\n-------------------------------------- pg."+pag);
+								}
 								break;
 							case "SS":
+								j++;
 								subsecao++;
 								paragrafo = 0;
 								numeracao = String.valueOf(capitulo) + "."
 										+ String.valueOf(secao) + "."
 										+ String.valueOf(subsecao) + ".";	
-								writer.write("\n"+j+"  "+linha.replace(tipo, numeracao));								
+								writer.write("\n"+j+"  "+linha.replace(tipo, numeracao));
+								if(j>=15){
+									j=0;
+									pag++;
+									writer.write("\n-------------------------------------- pg."+pag);
+								}
 								break;
 							case "P ":
-								paragrafo++;								
-								writer.write("\n"+j+"  "+"Lorem Ipsum "+paragrafo);
+								for(int k=0; k < Integer.parseInt(livro.get(i).substring(2, 3)); j++){	
+									k++;										
+									writer.write("\n"+j+"  "+"Lorem Ipsum "+k);
+									if(j>=15){
+										j=0;
+										pag++;
+										writer.write("\n-------------------------------------- pg."+pag);
+									}
+								}									
+								paragrafo++;
 							default:
 								break;
-							}			
-						}
-						writer.write("\n-------------------------------------- pg."+i);						
-					}			
+							}	
+														
+				}			
 			}		
-	}
-	
-	
-	
-	
+	}	
 	
 	
 	
