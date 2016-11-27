@@ -15,6 +15,7 @@ public class App {
 	private static GeneralTreeOfString arvore;
 	private static LinkedListOfString lista;
 	private static LinkedListOfString livro;
+	private static LinkedListOfString sumario;
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -40,7 +41,7 @@ public class App {
 		else
 			throw new RuntimeException("Erro ao gerar a árvore");
 		System.out.print("Gerando o Sumário...");		
-		LinkedListOfString sumario = gerarSumario();
+		sumario = gerarSumario();
 		if(sumario!=null){
 			System.out.println("ok\n");
 			printaSumario(sumario);
@@ -180,8 +181,7 @@ public class App {
 				
 				
 				int capitulo = 0, secao = 0, subsecao = 0, paragrafo = 0;
-				String linha = "", tipo = "", numeracao = "";
-				
+				String linha = "", tipo = "", numeracao = "";				
 				int pag = 0;				
 				
 				for(int i=0, j=0; i<lista.size(); i++){								
@@ -231,7 +231,7 @@ public class App {
 								}
 								break;
 							case "P ":
-								for(int k=0; k < Integer.parseInt(linha.substring(2,linha.length()-1)); j++){	
+								for(int k=0; k < Integer.parseInt(livro.get(i).substring(2, livro.get(i).length())); j++){
 									k++;										
 									writer.write("\n"+j+"  "+"Lorem Ipsum "+k);
 									if(j>=15){
@@ -245,7 +245,13 @@ public class App {
 								break;
 							}	
 														
-				}			
+				}
+				pag++;
+				writer.write("\n-------------------------------------- pg."+pag);
+				writer.write("\nSUMARIO");
+				for(int i=0; i<sumario.size();i++){					
+					writer.write("\n"+sumario.get(i));				
+				}
 			}		
 	}	
 	
