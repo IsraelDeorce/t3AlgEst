@@ -17,46 +17,22 @@ public class App {
 	private static String paragrafo;	
 	
 	public static void main(String[] args) throws IOException{
-		ArrayList<String> linhas = new ArrayList<String>();
-		
-		arvore = new GeneralTreeOfString();
-		
+		ArrayList<String> linhas = new ArrayList<String>();		
+
 		boolean livroUnico = false;
-		
+
 		try(BufferedReader in = new BufferedReader(new FileReader("livro.txt"))){
-			String linha = "";			
-			while((linha=in.readLine())!=null){
-				linhas.add(linha);
-			}
+			for (int i=0; in.ready(); i++)
+				linhas.add((i+1) + " " + in.readLine());
 		}
-			
-		for(int i = 0, j=1; j<linhas.size();i++,j++){
-			String linhaUm = linhas.get(i);
-			String linhaDois = linhas.get(j);
-			
-			if(linhaUm.toUpperCase().charAt(0)=='L')
-				arvore = new GeneralTreeOfString(linhaAnterior);
-			else{
-				switch()
-				
-			
-			case 'C':
-				
-			}
-		}
-		System.out.println(arvore.getRoot());
 	}
 }
-		
-		
-		
-	
-	/*		
-		
-		
-		for (int i=0; in.ready(); i++) 
-		{ 			
-			String linha = in.readLine();				
+			
+			
+			
+			
+			
+			/*
 			
 			switch(linha.substring(0, 2))
 			{
@@ -87,8 +63,11 @@ public class App {
 				throw new RuntimeException("Erro de leitura do tipo de linha!");				
 			}				
 		}
-		in.close();	//fecha o arquivo	
-		//===================================================================================					
+		
+		}
+	}
+}
+		 ===================================================================================					
 		 TESTES QUE FUNCIONAM (precisa dos TADS Integer e não String:
 		  
 		GeneralTreeOfString arvore = new  GeneralTreeOfString();

@@ -1,5 +1,7 @@
 package general;
 
+import java.util.ArrayList;
+
 public class GeneralTreeOfString {	
 	
 	private Node root;
@@ -9,6 +11,7 @@ public class GeneralTreeOfString {
 		
 		public Node father;
 		public String element;
+		public int kind;
 		public LinkedListOfNodes subtrees;
 		
 		public Node(String element){
@@ -16,6 +19,24 @@ public class GeneralTreeOfString {
 			this.father = null;
 			this.element = element;
 			subtrees = new LinkedListOfNodes();
+			switch(element){
+			case "L":
+				kind = 1;
+				break;
+			case "C":
+				kind = 2;
+				break;
+			case "S":
+				kind = 3;
+				break;
+			case "SS":
+				kind = 4;
+				break;
+			case "P":
+				kind = 5;
+				break;
+			}	
+		}
 		}
 		
 		public void addSubtree(Node n){
@@ -199,8 +220,7 @@ public class GeneralTreeOfString {
 	public void positionsPosAux(Node n, LinkedListOfString lista){
 		if(n!=null){			
 			for(int i=0; i<n.getSubtreeSize();i++){
-				positionsPosAux(n.getSubtree(i),lista);
-			}
+				positionsPosAux(n.getSubtree(i),lista);			}
 			lista.add(n.element);
 		}
 	}
@@ -220,6 +240,28 @@ public class GeneralTreeOfString {
 		}
 		return lista;
 	}
+	
+	public void plantar(Node father, ArrayList<String> linhas, int pos){
+		while(pos<linhas.size()){
+			Node novo = new Node(linhas.get(pos));
+			while(!(novo.kind<father.kind))
+				father = father.father;
+			arvore.add(father, novo);
+			linhas.dequeue(0);
+			if(novo.kind!=5)
+				father=novo;
+		
+			
+		
+			
+			
+		 
+		
+		
+		
+	}
+	
+	
 
 	@Override
 	public String toString() {
