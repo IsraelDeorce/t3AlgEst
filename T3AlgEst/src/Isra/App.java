@@ -58,7 +58,7 @@ public class App {
 		else
 			System.out.println("Erro ao gerar a árvore");
 		System.out.println("Sumário");
-		LinkedListOfString sumario = gerarSumario(lista);
+		LinkedListOfString sumario = gerarSumario(arvore.positionsPre());
 		for(int i = 0; i<sumario.size(); i++){
 			System.out.println(sumario.get(i));			
 		}
