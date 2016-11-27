@@ -1,8 +1,11 @@
 package Isra;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
+
 
 public class GeneralTreeOfString {	
 	
@@ -216,11 +219,12 @@ public class GeneralTreeOfString {
 			LinkedQueueOfNodes fila = new LinkedQueueOfNodes();
 			Node aux = root;
 			fila.enqueue(aux);
-			while(!fila.isEmpty())
+			while(!fila.isEmpty()){
 				aux=fila.dequeue();
 				lista.add(aux.element);
 				for(int i=0; i<aux.getSubtreeSize(); i++)
-					fila.enqueue(aux.getSubtree(i));			
+					fila.enqueue(aux.getSubtree(i));
+			}
 		}
 		return lista;
 	}
@@ -239,25 +243,46 @@ public class GeneralTreeOfString {
 		
 	}
 	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){
-		if(pos>=livro.size()) return;	
+		if(pos>=livro.size()) return;
+		
 		
 		if(filho.element.substring(0, 2).equals("C ")){			
 			this.root.addSubtree(filho);
-			montaArvoreAux(this.root,new Node(livro.get(pos)),pos+1, livro);
+			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 		if(filho.element.substring(0, 2).equals("S ")){
 			pai.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
-		if(filho.element.substring(0, 2).equals("SS ")){
-			pai.addSubtree(filho);
+		if(filho.element.substring(0, 2).equals("SS")){			
+			pai.addSubtree(filho);			
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
+			
 		}		
 		if(filho.element.substring(0, 2).equals("P ")){
 			pai.addSubtree(filho);
-			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
+			montaArvoreAux(filho.father,new Node(livro.get(pos)),pos+1, livro);
 		}		
 	}
+	
+	public ArrayList<String> positions(){
+		ArrayList<String> lista = new ArrayList<>();
+		if(root != null){
+			Queue<Node> fila = new LinkedList<>();
+			Node aux = root;
+			fila.offer(aux);
+			while(!fila.isEmpty()) {
+				aux = fila.poll();
+				lista.add(aux.element);
+				for(int i=0; i<aux.getSubtreeSize(); i++){
+					fila.offer(aux.getSubtree(i));
+				}
+			}
+		}
+		return lista;
+	}
+	
+	
 
 	@Override
 	public String toString() {
