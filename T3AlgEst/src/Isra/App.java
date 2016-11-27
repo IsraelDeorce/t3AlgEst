@@ -16,13 +16,13 @@ public class App {
 	private static String secao;
 	private static String subsecao;
 	private static String paragrafo;
-	private static ArrayList<String> lista;
+	private static LinkedListOfString lista;
 	private static int pos = 0;
 	
 	public static void main(String[] args) throws IOException{
 		
 		arvore = new GeneralTreeOfString();
-		lista = new ArrayList<>();
+		lista = new LinkedListOfString();
 		//boolean livroUnico = false;
 		
 		if(lerArquivo("livro.txt"))
@@ -33,35 +33,42 @@ public class App {
 		if(arvore.montaArvore(lista)){
 			System.out.println("Gerando a árvore... ok");
 			int capitulos = 0, secoes = 0, subsecoes = 0, paragrafos = 0;
-			for(String s: lista){
-				switch(s.substring(0, 2)){
-				case "C ":
-					capitulos++;
-					break;
-				case "S ":
-					secoes++;
-					break;
-				case "SS":
-					subsecoes++;
-					break;
-				case "P ":
-					paragrafos++;
-					break;
-				}				
-			}
-			System.out.println("Capitulos...: " + capitulos
+			for(int i = 0; i<lista.size();i++){
+				switch(lista.get(i).substring(0, 2)){
+					case "C ":
+						capitulos++;
+						break;
+					case "S ":
+						secoes++;
+						break;
+					case "SS":
+						subsecoes++;
+						break;
+					case "P ":
+						paragrafos++;
+						break;
+				}
+			}		
+			
+		System.out.println("Capitulos...: " + capitulos
 				+ "\nSeções......: " + secoes
 				+ "\nSubseções...: " + subsecoes
 				+ "\nParágrafos..: " + paragrafos);			
 		}
 		else
 			System.out.println("Erro ao gerar a árvore");
+		System.out.println("Sumário");
+		LinkedListOfString sumario = gerarSumario(lista);
+		for(int i = 0; i<sumario.size(); i++){
+			System.out.println(sumario.get(i));			
+		}
+	
 			
-		
+		/*
 		LinkedListOfString lista1 = arvore.positionsPre();
 		LinkedListOfString lista2 = arvore.positionsPos();
 		LinkedListOfString lista3 = arvore.positionsWidth();
-		ArrayList<String> lista4 = arvore.positions();
+		LinkedListOfString lista4 = arvore.positions();
 		
 		System.out.println("Posições Pré:");
 		System.out.println(lista1.toString());
@@ -72,11 +79,7 @@ public class App {
 		System.out.println("Posições:");
 		System.out.println(lista4.toString());
 		
-		/*		
-				Capitulos...: 2
-				Seções......: 6
-				Subseções...: 2
-				Parágrafos..: 16
+							
 				Gerando o sumário... ok
 				Imprimindo o livro para o arquivo livro_prod.txt... ok.
 			*/
@@ -96,7 +99,42 @@ public class App {
 	/* 2. Gerar o sumário do livro, indicando cada capítulo, cada seção e subseção com os respectivos 
 	números de página (assumindo que cada página suporte 15 linhas de texto); */
 	
-	public void gerarSumario(GeneralTreeOfString arvore){
+	public static LinkedListOfString gerarSumario(LinkedListOfString lista){
+		LinkedListOfString sumario = new LinkedListOfString();
+		int capitulo = 0, secao = 0, subsecao = 0;
+		String linha = "", tipo = "", numeracao = "";
+		for(int i = 0; i<lista.size();i++){
+			linha = lista.get(i);
+			tipo = linha.substring(0, 2);
+			switch(tipo){
+			case "C ":
+				capitulo++;
+				secao = 0;
+				subsecao = 0;
+				numeracao = String.valueOf(capitulo) + ". ";
+				sumario.add(linha.replace(tipo, numeracao)); 
+				break;
+			case "S ":
+				secao++;
+				subsecao = 0;
+				numeracao = String.valueOf(capitulo) + "."
+							+ String.valueOf(secao) + ". ";
+				sumario.add(linha.replace(tipo, numeracao));
+				break;
+			case "SS":
+				subsecao++;
+				numeracao = String.valueOf(capitulo) + "."
+						+ String.valueOf(secao) + "."
+						+ String.valueOf(subsecao) + ".";
+			sumario.add(linha.replace(tipo, numeracao));
+				break;
+			default:
+				break;
+			}			
+		}
+		return sumario;
+			
+		
 	
 	
 	}

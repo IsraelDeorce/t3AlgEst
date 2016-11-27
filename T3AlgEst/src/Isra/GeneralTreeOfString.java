@@ -188,6 +188,7 @@ public class GeneralTreeOfString {
 		positionsPreAux(root, lista);
 		return lista;		
 	}
+	
 	public void positionsPreAux(Node n, LinkedListOfString lista){
 		if(n!=null){
 			lista.add(n.element);			
@@ -203,6 +204,7 @@ public class GeneralTreeOfString {
 		positionsPosAux(root, lista);
 		return lista;		
 	}
+	
 	public void positionsPosAux(Node n, LinkedListOfString lista){
 		if(n!=null){			
 			for(int i=0; i<n.getSubtreeSize();i++){
@@ -229,7 +231,7 @@ public class GeneralTreeOfString {
 		return lista;
 	}
 	
-	public boolean montaArvore(ArrayList<String> livro){
+	public boolean montaArvore(LinkedListOfString livro){
 		if(livro.isEmpty()) return false;
 		if(livro.size()==1){
 			this.root = new Node(livro.get(0));
@@ -246,7 +248,7 @@ public class GeneralTreeOfString {
 		}		
 	}
 	
-	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){		
+	private void montaArvoreAux(Node pai, Node filho, int pos, LinkedListOfString livro){		
 		
 		
 		if(filho.element.substring(0, 2).equals("C ")){			
@@ -277,17 +279,17 @@ public class GeneralTreeOfString {
 		}				
 	}
 	
-	public ArrayList<String> positions(){
-		ArrayList<String> lista = new ArrayList<>();
+	public LinkedListOfString positions(){
+		LinkedListOfString lista = new LinkedListOfString();
 		if(root != null){
-			Queue<Node> fila = new LinkedList<>();
+			LinkedQueueOfNodes fila = new LinkedQueueOfNodes();
 			Node aux = root;
-			fila.offer(aux);
+			fila.enqueue(aux);
 			while(!fila.isEmpty()) {
-				aux = fila.poll();
+				aux = fila.dequeue();
 				lista.add(aux.element);
 				for(int i=0; i<aux.getSubtreeSize(); i++){
-					fila.offer(aux.getSubtree(i));
+					fila.enqueue(aux.getSubtree(i));
 				}
 			}
 		}
