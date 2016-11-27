@@ -29,7 +29,34 @@ public class App {
 			System.out.println("Carregando arquivo livro.txt... ok");
 		else
 			System.out.println("Erro ao carregar arquivo livro.txt");
-		arvore.montaArvore(lista);		
+		
+		if(arvore.montaArvore(lista)){
+			System.out.println("Gerando a árvore... ok");
+			int capitulos = 0, secoes = 0, subsecoes = 0, paragrafos = 0;
+			for(String s: lista){
+				switch(s.substring(0, 2)){
+				case "C ":
+					capitulos++;
+					break;
+				case "S ":
+					secoes++;
+					break;
+				case "SS":
+					subsecoes++;
+					break;
+				case "P ":
+					paragrafos++;
+					break;
+				}				
+			}
+			System.out.println("Capitulos...: " + capitulos
+				+ "\nSeções......: " + secoes
+				+ "\nSubseções...: " + subsecoes
+				+ "\nParágrafos..: " + paragrafos);			
+		}
+		else
+			System.out.println("Erro ao gerar a árvore");
+			
 		
 		LinkedListOfString lista1 = arvore.positionsPre();
 		LinkedListOfString lista2 = arvore.positionsPos();
@@ -45,10 +72,9 @@ public class App {
 		System.out.println("Posições:");
 		System.out.println(lista4.toString());
 		
-		/*		Gerando a árvore... ok
+		/*		
 				Capitulos...: 2
-				Seções......:
-				6
+				Seções......: 6
 				Subseções...: 2
 				Parágrafos..: 16
 				Gerando o sumário... ok

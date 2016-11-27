@@ -229,27 +229,33 @@ public class GeneralTreeOfString {
 		return lista;
 	}
 	
-	public void montaArvore(ArrayList<String> livro){
-		if(livro.isEmpty()) return;
-		if(livro.size()==1) this.root = new Node(livro.get(0));		
+	public boolean montaArvore(ArrayList<String> livro){
+		if(livro.isEmpty()) return false;
+		if(livro.size()==1){
+			this.root = new Node(livro.get(0));
+			return true;
+		}
 		else{		
 			Node pai = new Node(livro.get(0));
 			Node filho = new Node(livro.get(1));
 			this.root = pai;	
 			if(pai.element.substring(0, 2).equals("L ")){			
-				montaArvoreAux(pai,filho,2,livro);
-			}			
-		}
-		
+				montaArvoreAux(pai,filho,2,livro);				
+			}
+			return true;
+		}		
 	}
+	
 	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){		
+		
+		
 		if(filho.element.substring(0, 2).equals("C ")){			
 			this.root.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 		if(filho.element.substring(0, 2).equals("S ")){
 			while(pai.element.equals("S "))					
-				pai  = pai.father;
+				pai = pai.father;
 			pai.addSubtree(filho);			
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
