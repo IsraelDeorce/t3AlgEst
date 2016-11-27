@@ -81,6 +81,7 @@ public class App {
 	números de página (assumindo que cada página suporte 15 linhas de texto); */
 	
 	public static LinkedListOfString gerarSumario(){
+		LinkedListOfString lista = arvore.positionsPre();
 		if(lista==null) return null;
 		LinkedListOfString sumario = new LinkedListOfString();
 		int capitulo = 0, secao = 0, subsecao = 0;
