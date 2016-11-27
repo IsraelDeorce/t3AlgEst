@@ -37,13 +37,15 @@ public class App {
 		else
 			throw new RuntimeException("Erro ao gerar a árvore");
 		
-		/*=================================================================================*/
-		
-		System.out.println("Gerando o Sumário... ");
+		/*=================================================================================*/		
+		System.out.println("Gerando o Sumário... ");		
 		LinkedListOfString sumario = gerarSumario();
-		for(int i = 0; i<sumario.size(); i++){
-			System.out.println(sumario.get(i));			
-		}
+		if(sumario!=null)
+			printaSumario(sumario);
+		else
+			throw new RuntimeException("Erro ao gerar o sumário");
+		
+		
 	
 			
 		/*
@@ -82,6 +84,7 @@ public class App {
 	números de página (assumindo que cada página suporte 15 linhas de texto); */
 	
 	public static LinkedListOfString gerarSumario(){
+		if(lista==null) return null;
 		LinkedListOfString sumario = new LinkedListOfString();
 		int capitulo = 0, secao = 0, subsecao = 0;
 		String linha = "", tipo = "", numeracao = "";
@@ -114,9 +117,12 @@ public class App {
 				break;
 			}			
 		}
-		return sumario;	
-	
-	
+		return sumario;		
+	}
+	public static void printaSumario(LinkedListOfString sumario){
+		for(int i = 0; i<sumario.size(); i++){
+			System.out.println(sumario.get(i));			
+		}
 	}
 	
 	
