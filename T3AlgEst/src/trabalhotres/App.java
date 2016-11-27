@@ -1,4 +1,4 @@
-package Isradois;
+package trabalhotres;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

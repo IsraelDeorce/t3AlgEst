@@ -1,6 +1,6 @@
-package Isradois;
+package trabalhotres;
 
-import Isradois.GeneralTreeOfString.Node;
+import trabalhotres.GeneralTreeOfString.Node;
 
 public class LinkedListOfNodes {
 	

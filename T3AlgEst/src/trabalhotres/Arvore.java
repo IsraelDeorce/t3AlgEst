@@ -1,4 +1,4 @@
-package Isradois;
+package trabalhotres;
 
 public class Arvore {
 	

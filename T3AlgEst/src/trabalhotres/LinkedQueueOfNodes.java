@@ -1,6 +1,6 @@
-package Isra;
+package trabalhotres;
 
-import Isra.GeneralTreeOfString.Node;
+import trabalhotres.GeneralTreeOfString.Node;
 
 public class LinkedQueueOfNodes {
 	private Nodo head;
