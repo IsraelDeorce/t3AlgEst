@@ -4,15 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class App {
 	
 	private static GeneralTreeOfString arvore;
 	private static LinkedListOfString lista;
-
+	private static LinkedListOfString livro;
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -29,22 +26,25 @@ public class App {
 		}
 		
 		/*================================================================================*/
-		System.out.println("Gerando a árvore... ");
+		System.out.print("Gerando a árvore... ");
 		if(arvore.montaArvore(lista)){
 			System.out.print("ok\n");
+			livro = arvore.positionsPre();
 			printaQuantidade();	
 		}
 		else
 			throw new RuntimeException("Erro ao gerar a árvore");
-		System.out.println("Gerando o Sumário... ");		
+		System.out.print("Gerando o Sumário...");		
 		LinkedListOfString sumario = gerarSumario();
-		if(sumario!=null)
+		if(sumario!=null){
+			System.out.println("ok\n");
 			printaSumario(sumario);
+		}
 		else
 			throw new RuntimeException("Erro ao gerar o sumário");		
 
-	
-			
+	}
+		public void escondeComents(){	
 		/*
 		LinkedListOfString lista1 = arvore.positionsPre();
 		LinkedListOfString lista2 = arvore.positionsPos();
@@ -64,9 +64,8 @@ public class App {
 				Gerando o sumário... ok
 				Imprimindo o livro para o arquivo livro_prod.txt... ok.
 			*/
-	
+		}
 		
-	}
 	/* 1. Guardar a estrutura do livro em uma árvore; */
 	public static boolean lerArquivo(String arquivo) throws FileNotFoundException, IOException{
 		
@@ -80,14 +79,13 @@ public class App {
 	/* 2. Gerar o sumário do livro, indicando cada capítulo, cada seção e subseção com os respectivos 
 	números de página (assumindo que cada página suporte 15 linhas de texto); */
 	
-	public static LinkedListOfString gerarSumario(){
-		LinkedListOfString lista = arvore.positionsPre();
-		if(lista==null) return null;
+	public static LinkedListOfString gerarSumario(){		
+		if(livro==null) return null;
 		LinkedListOfString sumario = new LinkedListOfString();
 		int capitulo = 0, secao = 0, subsecao = 0;
 		String linha = "", tipo = "", numeracao = "";
-		for(int i = 0; i<lista.size();i++){
-			linha = lista.get(i);
+		for(int i = 0; i<livro.size();i++){
+			linha = livro.get(i);
 			tipo = linha.substring(0, 2);
 			switch(tipo){
 			case "C ":
@@ -117,6 +115,7 @@ public class App {
 		}
 		return sumario;		
 	}
+	
 	public static void printaSumario(LinkedListOfString sumario){
 		for(int i = 0; i<sumario.size(); i++){
 			System.out.println(sumario.get(i));			
@@ -130,8 +129,8 @@ public class App {
 	/*Printa na tela a quantidade de capitulos, secoes, subsecoes e paragrafos presentes no livro*/
 	public static void printaQuantidade(){
 		int capitulos = 0, secoes = 0, subsecoes = 0, paragrafos = 0;
-		for(int i = 0; i<lista.size();i++){
-			switch(lista.get(i).substring(0, 2)){
+		for(int i = 0; i<livro.size();i++){
+			switch(livro.get(i).substring(0, 2)){
 				case "C ":
 					capitulos++;
 					break;
@@ -151,4 +150,8 @@ public class App {
 			+ "\nSubseções...: " + subsecoes
 			+ "\nParágrafos..: " + paragrafos);			
 	}	
+
+	public static void geraNumeracao(){
+		
+	}
 }
