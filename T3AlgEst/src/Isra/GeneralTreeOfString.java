@@ -244,10 +244,7 @@ public class GeneralTreeOfString {
 		}
 		
 	}
-	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){
-		if(pos>=livro.size()) return;
-		
-		
+	private void montaArvoreAux(Node pai, Node filho, int pos, ArrayList<String> livro){		
 		if(filho.element.substring(0, 2).equals("C ")){			
 			this.root.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
@@ -263,9 +260,10 @@ public class GeneralTreeOfString {
 			
 		}		
 		if(filho.element.substring(0, 2).equals("P ")){
-			pai.addSubtree(filho);
+			pai.addSubtree(filho);		
+			if(pos>=livro.size()) return;
 			montaArvoreAux(filho.father,new Node(livro.get(pos)),pos+1, livro);
-		}		
+		}				
 	}
 	
 	public ArrayList<String> positions(){
