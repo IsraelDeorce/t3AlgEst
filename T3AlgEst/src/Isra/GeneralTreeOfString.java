@@ -1,11 +1,5 @@
 package Isra;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 
 public class GeneralTreeOfString {	
 	

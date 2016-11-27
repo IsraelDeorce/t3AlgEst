@@ -44,6 +44,7 @@ public class App {
 			throw new RuntimeException("Erro ao gerar o sumário");		
 
 	}
+	
 		public void escondeComents(){	
 		/*
 		LinkedListOfString lista1 = arvore.positionsPre();
@@ -82,32 +83,35 @@ public class App {
 	public static LinkedListOfString gerarSumario(){		
 		if(livro==null) return null;
 		LinkedListOfString sumario = new LinkedListOfString();
-		int capitulo = 0, secao = 0, subsecao = 0;
-		String linha = "", tipo = "", numeracao = "";
+		LinkedListOfString livroPronto = new LinkedListOfString();
+		int capitulo = 0, secao = 0, subsecao = 0, pagina = 0, linha = 1;
+		String texto = "", tipo = "", ordem = "";
 		for(int i = 0; i<livro.size();i++){
-			linha = livro.get(i);
-			tipo = linha.substring(0, 2);
+			texto = livro.get(i);
+			tipo = texto.substring(0, 2);
 			switch(tipo){
 			case "C ":
 				capitulo++;
 				secao = 0;
 				subsecao = 0;
-				numeracao = String.valueOf(capitulo) + ". ";
-				sumario.add(linha.replace(tipo, numeracao)); 
+				ordem = String.valueOf(capitulo) + ". ";
+				pagina++;
+				linha=1;
+				livroPronto.add("texto.replace(tipo, ordem));				
 				break;
 			case "S ":
 				secao++;
 				subsecao = 0;
-				numeracao = String.valueOf(capitulo) + "."
+				ordem = String.valueOf(capitulo) + "."
 							+ String.valueOf(secao) + ". ";
-				sumario.add(linha.replace(tipo, numeracao));
+				sumario.add(texto.replace(tipo, ordem));
 				break;
 			case "SS":
 				subsecao++;
-				numeracao = String.valueOf(capitulo) + "."
+				ordem = String.valueOf(capitulo) + "."
 						+ String.valueOf(secao) + "."
 						+ String.valueOf(subsecao) + ".";
-			sumario.add(linha.replace(tipo, numeracao));
+			sumario.add(texto.replace(tipo, ordem));
 				break;
 			default:
 				break;
@@ -151,7 +155,11 @@ public class App {
 			+ "\nParágrafos..: " + paragrafos);			
 	}	
 
-	public static void geraNumeracao(){
+	public static void geraNumeracao(LinkedListOfString sumario){
+		if(livro==null) return;
+		int pagina = 0, linha = 0;
+		
+		
 		
 	}
 }
