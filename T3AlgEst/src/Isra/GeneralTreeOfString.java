@@ -256,15 +256,14 @@ public class GeneralTreeOfString {
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 		if(filho.element.substring(0, 2).equals("S ")){
-			while(pai.element.substring(0, 2).equals("S ") || 
-					pai.element.substring(0, 2).equals("SS"))				
+			while(!(pai.element.substring(0, 2).equals("C ")))				
 				pai  = pai.father;
 			pai.addSubtree(filho);			
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 
 		if(filho.element.substring(0, 2).equals("SS")){			
-			while(pai.element.substring(0, 2).equals("SS"))				
+			while(!(pai.element.substring(0, 2).equals("S ")))				
 				pai  = pai.father;
 			pai.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
