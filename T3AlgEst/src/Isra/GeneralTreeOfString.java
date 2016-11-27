@@ -248,16 +248,22 @@ public class GeneralTreeOfString {
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 		if(filho.element.substring(0, 2).equals("S ")){
-			pai.addSubtree(filho);
+			while(pai.element.equals("S "))					
+				pai  = pai.father;
+			pai.addSubtree(filho);			
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
 
 		if(filho.element.substring(0, 2).equals("SS")){			
+			while(pai.element.equals("SS"))					
+				pai  = pai.father;
 			pai.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 			
 		}		
 		if(filho.element.substring(0, 2).equals("P ")){
+			while(pai.element.equals("P"))					
+				pai  = pai.father;
 			pai.addSubtree(filho);		
 			if(pos>=livro.size()) return;
 			montaArvoreAux(filho.father,new Node(livro.get(pos)),pos+1, livro);

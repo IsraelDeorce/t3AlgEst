@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 public class App {
 	
@@ -25,23 +25,16 @@ public class App {
 		lista = new ArrayList<>();
 		//boolean livroUnico = false;
 		
-		
-			
-		//===================================================================================
-		//Gera os 100 nomes do txt e armazena em um vetor para ser utilizado no gerador de clientes			
-		BufferedReader in = new BufferedReader(new FileReader("livro.txt")); 				
-		for (int i=0; in.ready(); i++) 		{ 			
-			lista.add(in.readLine());							
-		}						
-		in.close();	//fecha o arquivo	
-		
-		
-		arvore.montaArvore(lista);
+		if(lerArquivo("livro.txt"))
+			System.out.println("Carregando arquivo livro.txt... ok");
+		else
+			System.out.println("Erro ao carregar arquivo livro.txt");
+		arvore.montaArvore(lista);		
 		
 		LinkedListOfString lista1 = arvore.positionsPre();
 		LinkedListOfString lista2 = arvore.positionsPos();
 		LinkedListOfString lista3 = arvore.positionsWidth();
-		ArrayList<String >lista4 = arvore.positions();
+		ArrayList<String> lista4 = arvore.positions();
 		
 		System.out.println("Posições Pré:");
 		System.out.println(lista1.toString());
@@ -51,7 +44,48 @@ public class App {
 		System.out.println(lista3.toString());	
 		System.out.println("Posições:");
 		System.out.println(lista4.toString());
+		
+		/*		Gerando a árvore... ok
+				Capitulos...: 2
+				Seções......:
+				6
+				Subseções...: 2
+				Parágrafos..: 16
+				Gerando o sumário... ok
+				Imprimindo o livro para o arquivo livro_prod.txt... ok.
+			*/
 	
+		
+	}
+	/* 1. Guardar a estrutura do livro em uma árvore; */
+	public static boolean lerArquivo(String arquivo) throws FileNotFoundException, IOException{
+		
+		try(BufferedReader in = new BufferedReader(new FileReader(arquivo))){ 				
+			while(in.ready())  			
+				lista.add(in.readLine());
+			return true;
+		}
+	}
+	
+	/* 2. Gerar o sumário do livro, indicando cada capítulo, cada seção e subseção com os respectivos 
+	números de página (assumindo que cada página suporte 15 linhas de texto); */
+	
+	public void gerarSumario(GeneralTreeOfString arvore){
+	
+	
+	}
+	
+	
+	/* 3. “Imprimir” (gravar) o livro em um arquivo texto de saída, observando o formato a seguir.*/
+	
+	/*
+	
+		
+		
+	*/
+	
+		
+		
 		/*
 	}
 	public static void adiciona(String linha){
@@ -124,6 +158,6 @@ public class App {
 		
 	}
 	*/
-	}
+	
 	
 }
