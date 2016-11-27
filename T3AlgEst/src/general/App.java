@@ -26,20 +26,21 @@ public class App {
 				linhas.add(in.readLine());
 		}
 		
-		System.out.println(linhas.size());
+		System.out.println(linhas.size());		
+
+
+		GeneralTreeOfString arvore = new GeneralTreeOfString();
 		
-				
-	
-	GeneralTreeOfString arvore = new GeneralTreeOfString(linhas.get(0));
-	System.out.println(arvore.getRoot());
-	
-	arvore.plantar(linhas);
-	
-	System.out.println(arvore.size());
-	
+
+
+
+		arvore.plantar(linhas);
+
+		System.out.println(arvore.size());
+
 	}
-	
-	
+
+
 }
 			
 			

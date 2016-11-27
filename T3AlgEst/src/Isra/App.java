@@ -36,8 +36,6 @@ public class App {
 		in.close();	//fecha o arquivo	
 		
 		
-		
-		
 		arvore.montaArvore(lista);
 		
 		LinkedListOfString lista1 = arvore.positionsPre();

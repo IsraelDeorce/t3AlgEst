@@ -216,11 +216,12 @@ public class GeneralTreeOfString {
 			LinkedQueueOfNodes fila = new LinkedQueueOfNodes();
 			Node aux = root;
 			fila.enqueue(aux);
-			while(!fila.isEmpty())
+			while(!fila.isEmpty()){
 				aux=fila.dequeue();
 				lista.add(aux.element);
 				for(int i=0; i<aux.getSubtreeSize(); i++)
-					fila.enqueue(aux.getSubtree(i));			
+					fila.enqueue(aux.getSubtree(i));
+			}
 		}
 		return lista;
 	}
@@ -249,7 +250,7 @@ public class GeneralTreeOfString {
 			pai.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		
-		if(filho.element.substring(0, 2).equals("SS ")){
+		if(filho.element.substring(0, 2).equals("SS")){
 			pai.addSubtree(filho);
 			montaArvoreAux(filho,new Node(livro.get(pos)),pos+1, livro);
 		}		

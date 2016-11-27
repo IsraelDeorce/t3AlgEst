@@ -2,6 +2,8 @@ package general;
 
 import java.util.ArrayList;
 
+
+
 public class GeneralTreeOfString {	
 	
 	private Node root;
@@ -59,7 +61,7 @@ public class GeneralTreeOfString {
 		}
 		@Override
 		public String toString() {
-			return "Node [father=" + father + ", element=" + element + ", subtrees=" + subtrees + "]";
+			return "Father=" + father + ", element=" + element;
 		}	
 	}
 	
@@ -244,20 +246,26 @@ public class GeneralTreeOfString {
 	}
 	
 	public void plantar(ArrayList<String> linhas){
-		
+		this.root = new Node(linhas.get(0));
 		plantar(root, linhas, 1);		
 	}
 	
-	private void plantar(Node father, ArrayList<String> linhas, int pos){
+	private void plantar(Node pai, ArrayList<String> linhas, int pos){
+		
+		System.out.println("Recursao " + pos + "\nNodo Referência: " + pai.element);		
 		while(pos<linhas.size()){
 			Node novo = new Node(linhas.get(pos));
-			while(!(novo.kind<father.kind))
-				father = father.father;
-			this.add(father, novo);
+			System.out.println("Nodo criado: " + novo.element);
+			while(novo.kind<=pai.kind){
+				pai = pai.father;
+				System.out.println("Nodo Referência atualizado: " + pai.element);
+			}
+			this.add(pai, novo);
+			System.out.println("Adicionei filho " + novo.element + " Nodo Referência: " + pai.element);
 			pos++;
 			if(novo.kind!=5)
-				father=novo;
-			plantar(father, linhas, pos);
+				pai=novo;			
+			plantar(pai, linhas, pos);
 		}
 	}
 	
