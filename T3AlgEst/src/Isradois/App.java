@@ -231,7 +231,8 @@ public class App {
 								}
 								break;
 							case "P ":
-								for(int k=0; k < Integer.parseInt(livro.get(i).substring(2, livro.get(i).length())); j++){
+								for(int k=0; k < Integer.parseInt(livro.get(i).substring(2, livro.get(i).length()));){
+									j++;
 									k++;										
 									writer.write("\n"+j+"  "+"Lorem Ipsum "+k);
 									if(j>=15){
