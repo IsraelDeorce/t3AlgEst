@@ -190,10 +190,8 @@ public class GeneralTreeOfString {
 	}
 	public void positionsPreAux(Node n, LinkedListOfString lista){
 		if(n!=null){
-			lista.add(n.element);
-			System.out.println("Adicionei " + n.element);
-			for(int i=0; i<n.getSubtreeSize();i++){
-				System.out.println("Recursão com " + n.getSubtree(i));
+			lista.add(n.element);			
+			for(int i=0; i<n.getSubtreeSize();i++){				
 				positionsPreAux(n.getSubtree(i),lista);
 			}			
 		}
