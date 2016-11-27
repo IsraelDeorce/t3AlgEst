@@ -19,24 +19,23 @@ public class GeneralTreeOfString {
 			this.father = null;
 			this.element = element;
 			subtrees = new LinkedListOfNodes();
-			switch(element){
-			case "L":
+			switch(element.substring(0,2)){
+			case "L ":
 				kind = 1;
 				break;
-			case "C":
+			case "C ":
 				kind = 2;
 				break;
-			case "S":
+			case "S ":
 				kind = 3;
 				break;
 			case "SS":
 				kind = 4;
 				break;
-			case "P":
+			case "P ":
 				kind = 5;
 				break;
 			}	
-		}
 		}
 		
 		public void addSubtree(Node n){
@@ -91,9 +90,12 @@ public class GeneralTreeOfString {
 		}
 		return n;	
 	}
+	public boolean add(Node father, Node novo){
+		return add(father.element, novo.element);
+	}
 	
 	// insere o elemento e como	filho de father
-	public boolean add(String element, String father){
+	public boolean add(String father, String element){
 		Node n = new Node(element);
 		if(father==null){//se for nulo, é para adicionar na raiz
 			if(root!=null){	
@@ -241,28 +243,24 @@ public class GeneralTreeOfString {
 		return lista;
 	}
 	
-	public void plantar(Node father, ArrayList<String> linhas, int pos){
+	public void plantar(ArrayList<String> linhas){
+		
+		plantar(root, linhas, 1);		
+	}
+	
+	private void plantar(Node father, ArrayList<String> linhas, int pos){
 		while(pos<linhas.size()){
 			Node novo = new Node(linhas.get(pos));
 			while(!(novo.kind<father.kind))
 				father = father.father;
-			arvore.add(father, novo);
-			linhas.dequeue(0);
+			this.add(father, novo);
+			pos++;
 			if(novo.kind!=5)
 				father=novo;
-		
-			
-		
-			
-			
-		 
-		
-		
-		
+			plantar(father, linhas, pos);
+		}
 	}
 	
-	
-
 	@Override
 	public String toString() {
 		return "GeneralTreeOfInteger [root=" + root + ", count=" + count + "]";

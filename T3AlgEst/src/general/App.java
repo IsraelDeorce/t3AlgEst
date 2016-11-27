@@ -23,9 +23,23 @@ public class App {
 
 		try(BufferedReader in = new BufferedReader(new FileReader("livro.txt"))){
 			for (int i=0; in.ready(); i++)
-				linhas.add((i+1) + " " + in.readLine());
+				linhas.add(in.readLine());
 		}
+		
+		System.out.println(linhas.size());
+		
+				
+	
+	GeneralTreeOfString arvore = new GeneralTreeOfString(linhas.get(0));
+	System.out.println(arvore.getRoot());
+	
+	arvore.plantar(linhas);
+	
+	System.out.println(arvore.size());
+	
 	}
+	
+	
 }
 			
 			
